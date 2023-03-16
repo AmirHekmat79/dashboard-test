@@ -2,14 +2,12 @@
   <v-container class="fluid mt-20">
     <v-row class="d-flex justify-center items-center flex-wrap">
       <v-col col="4" v-for="card in cards" :key="card.item">
-        <v-card class="align-center">
-          <v-icon class="Margin1 pt-3" :color="card.Color">{{
-            card.icon
-          }}</v-icon>
-          <v-card-title class="py-3 font-weight-bold Margin2">{{
-            card.counts
-          }}</v-card-title>
-          <v-card-subtitle class="Margin3">
+        <v-card>
+          <v-icon class="pt-3" :color="card.Color">{{ card.icon }}</v-icon>
+          <v-card-title class="font-weight-bold"
+            ><h3 class="py-3 mx-auto">{{ card.counts }}</h3></v-card-title
+          >
+          <v-card-subtitle>
             {{ card.item }}
           </v-card-subtitle>
         </v-card>
@@ -18,19 +16,25 @@
     <v-row class="d-flex justify-center items-center flex-wrap">
       <v-col col="4">
         <v-card class="elevation-4 text-center">
-          <v-card-title class="font-weight-bold">وضعیت مشتری ها</v-card-title>
+          <v-card-title class="font-weight-bold"
+            ><h3 class="mx-auto">وضعیت مشتری ها</h3></v-card-title
+          >
           <ColumnChart :xAxis="chart.xAxis" :series="chart.customers" />
         </v-card>
       </v-col>
       <v-col col="4">
         <v-card class="elevation-4">
-          <v-card-title class="font-weight-bold">وضعیت پروژه ها</v-card-title>
+          <v-card-title class="font-weight-bold"
+            ><h3 class="mx-auto">وضعیت پروژه ها</h3></v-card-title
+          >
           <LineChart :xAxis="chart.xAxis" :series="chart.projects" />
         </v-card>
       </v-col>
       <v-col col="4">
         <v-card class="elevation-4">
-          <v-card-title class="font-weight-bold">وضعیت کاربران </v-card-title>
+          <v-card-title class="font-weight-bold"
+            ><h3 class="mx-auto">وضعیت کاربران</h3></v-card-title
+          >
           <ColumnChart :xAxis="chart.xAxis" :series="chart.users" />
         </v-card>
       </v-col>
@@ -56,8 +60,10 @@ export default {
     ColumnChart,
     LineChart,
   },
+
   data() {
     return {
+      Alignment: 'center',
       chart: {
         title: 'Area chart title',
         subtitle: 'Area chart subtitle',
@@ -147,16 +153,7 @@ export default {
 };
 </script>
 <style scoped>
-.Margin1 {
-  /* text-align: center; */
-  margin-right: 130px;
-}
-.Margin2 {
-  /* text-align: center; */
-  margin-right: 114px;
-}
-.Margin3 {
-  /* text-align: center; */
-  margin-right: 110px;
+.v-card {
+  text-align: center;
 }
 </style>
