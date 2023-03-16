@@ -1,113 +1,173 @@
 <template>
-    <v-container>
-      <v-data-table dark :headers="headers" :items="desserts" class="elevation-1">
-        <template v-slot:[`header.name`]="{ header }">
-          {{ header.text.toUpperCase() }}
-        </template>
-      </v-data-table>
-    </v-container>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-     return{
-        headers: [
+  <v-container>
+    <v-card
+      elevation="4"
+      class="pa-4 page-title-container text-center d-flex justify-space-around items-center ma-6"
+    >
+      <v-btn elevation="5" color="warning"> رفرش جدول</v-btn>
+      <h4 class="text--gray px-5">جدول لایسنس ها</h4>
+      <AddDialogs
+        title="اطلاعات لایسنس مورد نظر را وارد کنید"
+        btnTitle="افزودن لایسنس"
+      >
+        <v-form ref="form" lazy-validation>
+          <v-text-field
+            v-model="validityDuration"
+            label="مدت اعتبار"
+            :rules="[validateCustomerName]"
+          ></v-text-field>
+
+          <v-text-field
+            v-model="customerName"
+            label="نام مشتری"
+            :rules="[validateCustomerName]"
+          ></v-text-field>
+
+          <v-text-field
+            v-model="projectName"
+            label="نام پروژه"
+            :rules="[validateCustomerName]"
+            required
+          ></v-text-field>
+
+          <v-btn color="warning" @click="AddLicense"> افزودن </v-btn>
+        </v-form>
+      </AddDialogs>
+    </v-card>
+    <v-data-table
+      :headers="headers"
+      :items="desserts"
+      dark
+      class="text-center elevation-4 font-weight-bold"
+    >
+      <template v-slot:[`header.name`]="{ header }">
+        {{ header.text.toUpperCase() }}
+      </template>
+    </v-data-table>
+  </v-container>
+</template>
+
+<script>
+import AddDialogs from '@/components/AddDialogs.vue';
+import { getOneLicense } from '@/api/apiLicenses';
+import { validateCustomerName } from '@/helpers/rules';
+export default {
+  data() {
+    return {
+      validityDuration: null,
+
+      address: null,
+      phoneNumber: null,
+
+      headers: [
         {
-          text: "Dessert (100g serving)",
-          align: "start",
-          value: "name",
+          align: 'center',
         },
-        { text: "Calories", value: "calories" },
-        { text: "Fat (g)", value: "fat" },
-        { text: "Carbs (g)", value: "carbs" },
-        { text: "Protein (g)", value: "protein" },
-        { text: "Iron (%)", value: "iron" },
+        { text: 'validityDuration', value: 'validityDuration' },
+        { text: ' customerName', value: 'customerName' },
+        { text: 'projectName', value: 'projectName' },
       ],
       desserts: [
         {
-          name: "Frozen Yogurt",
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: 1,
+          validityDuration: 86400,
+          parameters: {
+            hi: 'by',
+          },
+          customerName: 'amirh01',
+          projectName: 'passw',
         },
         {
-          name: "Ice cream sandwich",
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: 1,
+          validityDuration: 86400,
+          parameters: {
+            hi: 'by',
+          },
+          customerName: 'amirh01',
+          projectName: 'passw',
         },
         {
-          name: "Eclair",
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: 7,
+          validityDuration: 86400,
+          parameters: {
+            hi: 'by',
+          },
+          customerName: 'amirh01',
+          projectName: 'passw',
         },
         {
-          name: "Cupcake",
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: 8,
+          validityDuration: 86400,
+          parameters: {
+            hi: 'by',
+          },
+          customerName: 'amirh01',
+          projectName: 'passw',
         },
         {
-          name: "Gingerbread",
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: 16,
+          validityDuration: 86400,
+          parameters: {
+            hi: 'by',
+          },
+          customerName: 'amirh01',
+          projectName: 'passw',
         },
         {
-          name: "Jelly bean",
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: 0,
+          validityDuration: 86400,
+          parameters: {
+            hi: 'by',
+          },
+          customerName: 'amirh01',
+          projectName: 'passw',
         },
         {
-          name: "Lollipop",
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: 2,
+          validityDuration: 86400,
+          parameters: {
+            hi: 'by',
+          },
+          customerName: 'amirh01',
+          projectName: 'passw',
         },
         {
-          name: "Honeycomb",
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: 45,
+          validityDuration: 86400,
+          parameters: {
+            hi: 'by',
+          },
+          customerName: 'amirh01',
+          projectName: 'passw',
         },
         {
-          name: "Donut",
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: 22,
+          validityDuration: 86400,
+          parameters: {
+            hi: 'by',
+          },
+          customerName: 'amirh01',
+          projectName: 'passw',
         },
         {
-          name: "KitKat",
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: 6,
-        }
-      ]
-     }
-   
-  }}
-  </script>
-  
+          validityDuration: 86400,
+          parameters: {
+            hi: 'by',
+          },
+          customerName: 'amirh01',
+          projectName: 'passw',
+        },
+      ],
+    };
+  },
+  components: {
+    AddDialogs,
+  },
+  methods: {
+    
+    validateCustomerName,
+    AddLicense() {
+      if (!this.$refs.form.validate()) {
+        console.log('not valid');
+        return;
+      }
+    },
+  },
+  created() {
+    getOneLicense().then((res) => {
+      console.log(res);
+    });
+  },
+};
+</script>

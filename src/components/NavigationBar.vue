@@ -1,24 +1,21 @@
 <template>
   <div>
-    <v-app-bar color="gray darken-3" class="flex-grow-0" flat app dark>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-app-bar-title class="text-h5">سامانه مدیریت گواهی </v-app-bar-title>
+    <v-app-bar color="grey darken-2" class="flex-grow-0" flat app dark>
+      <v-app-bar-nav-icon
+        class="white--text"
+        @click.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
+      <v-app-bar-title class="white--text text-h5"
+        >سامانه مدیریت گواهی
+      </v-app-bar-title>
       <v-spacer></v-spacer>
       <div class="icons">
-        <v-icon class="light-blue-text darken-4">mdi-login</v-icon>
+        <v-icon class="white--text darken-4">mdi-login</v-icon>
       </div>
     </v-app-bar>
-    <v-navigation-drawer
-      flat
-      dark
-      right
-      app
-      v-model="drawer"
-      bottom
-    >
+    <v-navigation-drawer flat dark right app v-model="drawer" bottom>
       <v-list-item>
         <v-list-item-content class="text-center">
-          <v-list-item-title class="display-1"> داشبورد</v-list-item-title>
           <v-list-item-subtitle class="text-h5 gray--text darken-4"
             ><v-icon>mdi-view-dashboard</v-icon></v-list-item-subtitle
           >
@@ -28,7 +25,7 @@
       <v-list dense nav class="text-right">
         <v-list-item v-for="item in items" :key="item.title" link>
           <v-list-item-content>
-            <v-list-item-title
+            <v-list-item-title @click="navigatePages(item.title)"
               ><span class="text-h6">{{ item.title }}</span></v-list-item-title
             >
           </v-list-item-content>
@@ -43,7 +40,7 @@
 
 <script>
 export default {
-  name: "NavigationBar",
+  name: 'NavigationBar',
   data: () => ({
     drawer: false,
     // items: [
@@ -52,14 +49,29 @@ export default {
     //   { title: "Settings", icon: "mdi-cog" },
     // ],
     items: [
-      { title: "کاربر", icon: "mdi-menu-down" },
-      { title: "گواهی ها", icon: "mdi-menu-down" },
-      { title: "پروژه", icon: "mdi-menu-down" },
-      { title: "مشتری", icon: "mdi-menu-down" },
+      { title: 'داشبورد', icon: 'mdi-menu-down' },
+      { title: 'کاربر', icon: 'mdi-menu-down' },
+      { title: 'لایسنس ها', icon: 'mdi-menu-down' },
+      { title: 'پروژه', icon: 'mdi-menu-down' },
+      { title: 'مشتری', icon: 'mdi-menu-down' },
     ],
   }),
+  methods: {
+    navigatePages(title) {
+      console.log(title);
+      if (title == 'مشتری') {
+        this.$router.push('Customers');
+      } else if (title == 'کاربر') {
+        this.$router.push('Users');
+      } else if (title == 'لایسنس ها') {
+        this.$router.push('Licenses');
+      } else if (title == 'داشبورد') {
+        this.$router.push('/');
+      } else {
+        this.$router.push('Projects');
+      }
+    },
+  },
 };
 </script>
-<style scoped>
-
-</style>
+<style scoped></style>

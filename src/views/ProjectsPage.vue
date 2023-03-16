@@ -1,111 +1,135 @@
 <template>
-    <v-container>
-      <v-data-table dark :headers="headers" :items="desserts" class="elevation-1">
-        <template v-slot:[`header.name`]="{ header }">
-          {{ header.text.toUpperCase() }}
-        </template>
-      </v-data-table>
-    </v-container>
-  </template>
-  
-  <script>
-  export default {
-    data: () => ({
-      headers: [
-        {
-          text: "Dessert (100g serving)",
-          align: "start",
-          value: "name",
-        },
-        { text: "Calories", value: "calories" },
-        { text: "Fat (g)", value: "fat" },
-        { text: "Carbs (g)", value: "carbs" },
-        { text: "Protein (g)", value: "protein" },
-        { text: "Iron (%)", value: "iron" },
-      ],
-      desserts: [
-        {
-          name: "Frozen Yogurt",
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-          iron: 1,
-        },
-        {
-          name: "Ice cream sandwich",
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-          iron: 1,
-        },
-        {
-          name: "Eclair",
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-          iron: 7,
-        },
-        {
-          name: "Cupcake",
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-          iron: 8,
-        },
-        {
-          name: "Gingerbread",
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-          iron: 16,
-        },
-        {
-          name: "Jelly bean",
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-          iron: 0,
-        },
-        {
-          name: "Lollipop",
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-          iron: 2,
-        },
-        {
-          name: "Honeycomb",
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-          iron: 45,
-        },
-        {
-          name: "Donut",
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-          iron: 22,
-        },
-        {
-          name: "KitKat",
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-          iron: 6,
-        },
-      ],
-    }),
-  };
-  </script>
-  
+  <v-container>
+    <v-card
+      elevation="4"
+      class="pa-4 page-title-container text-center d-flex justify-space-around items-center ma-6"
+    >
+      <v-btn elevation="5" color="warning"> رفرش جدول</v-btn>
+      <h4 class="text--gray px-5">جدول پروژه ها</h4>
+
+      <AddDialogs
+        title="اطلاعات پروژه مورد نظر را وارد کنید"
+        btnTitle="افزودن پروژه"
+      >
+        <v-form ref="form" lazy-validation>
+          <v-text-field
+            v-model="name"
+            label="اسم"
+            :rules="[ruleRequired]"
+          ></v-text-field>
+          <v-text-field
+            v-model="description"
+            label="توضیحات"
+            :rules="[ruleRequired]"
+          ></v-text-field>
+
+          <v-btn color="warning" @click="AddProject"> افزودن </v-btn>
+        </v-form>
+      </AddDialogs>
+    </v-card>
+    <v-data-table
+      :headers="headers"
+      :items="desserts"
+      dark
+      class="text-center elevation-4 font-weight-bold"
+    >
+      <template v-slot:[`header.name`]="{ header }">
+        {{ header.text.toUpperCase() }}
+      </template>
+    </v-data-table>
+  </v-container>
+</template>
+
+<script>
+import AddDialogs from '@/components/AddDialogs.vue';
+import { ruleRequired } from '@/helpers/rules.js';
+import { getOneProject } from '@/api/apiProjects';
+export default {
+  data: () => ({
+    description: null,
+    name: null,
+    customerName: null,
+
+    headers: [
+      {
+        align: 'center',
+      },
+      { text: 'name', value: 'name' },
+      { text: 'description', value: 'description' },
+    ],
+    desserts: [
+      {
+        name: 'passw',
+        parameters: ['hi'],
+        description: 'password manager',
+      },
+      {
+        name: 'passw',
+        parameters: ['hi'],
+        description: 'password manager',
+      },
+      {
+        name: 'passw',
+        parameters: ['hi'],
+        description: 'password manager',
+      },
+      {
+        name: 'passw',
+        parameters: ['hi'],
+        description: 'password manager',
+      },
+      {
+        name: 'passw',
+        parameters: ['hi'],
+        description: 'password manager',
+      },
+      {
+        name: 'passw',
+        parameters: ['hi'],
+        description: 'password manager',
+      },
+      {
+        name: 'passw',
+        parameters: ['hi'],
+        description: 'password manager',
+      },
+      {
+        name: 'passw',
+        parameters: ['hi'],
+        description: 'password manager',
+      },
+      {
+        name: 'passw',
+        parameters: ['hi'],
+        description: 'password manager',
+      },
+      {
+        name: 'passw',
+        parameters: ['hi'],
+        description: 'password manager',
+      },
+    ],
+  }),
+  components: {
+    AddDialogs,
+  },
+
+  methods: {
+    ruleRequired,
+
+    AddProject() {
+      if (!this.$refs.form.validate()) {
+        console.log('not valid');
+        return;
+      }
+
+      console.log('reached');
+    },
+  },
+  created() {
+    getOneProject().then((res) => {
+      console.log(res);
+    });
+  },
+};
+</script>

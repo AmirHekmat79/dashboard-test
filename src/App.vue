@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <NavigationBar v-if="!$route.meta.hideNavbar" />
-    <v-main>
+    <v-main style="background-color: #f8f8f8">
       <router-view></router-view>
     </v-main>
   </v-app>
@@ -9,9 +9,9 @@
 
 <script>
 // import DashboardPannel from "./components/DashboardPannel.vue";
-import NavigationBar from "./components/NavigationBar.vue";
+import NavigationBar from './components/NavigationBar.vue';
 export default {
-  name: "App",
+  name: 'App',
   props: {
     source: String,
   },
@@ -28,8 +28,8 @@ export default {
 };
 </script>
 
-<!-- <style>
-body {
-  background-color: #4e4a4a;
-}
-</style> -->
+<style>
+/* .v-application {
+ background-color: #bdbdbd !important; 
+} */
+</style>

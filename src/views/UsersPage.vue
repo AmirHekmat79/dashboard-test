@@ -1,6 +1,39 @@
 <template>
   <v-container>
-    <v-data-table dark :headers="headers" :items="desserts" class="elevation-1">
+    <v-card
+      elevation="4"
+      class="pa-4 page-title-container text-center d-flex justify-space-around items-center ma-6"
+    >
+      <v-btn elevation="5" color="warning"> رفرش جدول</v-btn>
+      <h4 class="text--gray px-5">جدول کاربران</h4>
+
+      <AddDialogs
+        title="اطلاعات کاربر مورد نظر را وارد کنید"
+        btnTitle="افزودن کاربر"
+      >
+        <v-form ref="form" lazy-validation>
+          <v-text-field
+            v-model="username"
+            label="نام کاربری"
+            :rules="[ruleRequired]"
+          ></v-text-field>
+
+          <v-text-field
+            v-model="password"
+            label="رمز ورود"
+            :rules="[ruleRequired]"
+          ></v-text-field>
+
+          <v-btn color="warning" @click="AddUser"> افزودن </v-btn>
+        </v-form>
+      </AddDialogs>
+    </v-card>
+    <v-data-table
+      :headers="headers"
+      :items="desserts"
+      dark
+      class="elevation-4 font-weight-bold"
+    >
       <template v-slot:[`header.name`]="{ header }">
         {{ header.text.toUpperCase() }}
       </template>
@@ -9,102 +42,85 @@
 </template>
 
 <script>
+import { getOneUser } from '@/api/apiUsers';
+import AddDialogs from '@/components/AddDialogs.vue';
+import {ruleRequired} from '../helpers/rules'
+
 export default {
   data: () => ({
+    username: null,
+    password: null,
+
     headers: [
       {
-        text: "Dessert (100g serving)",
-        align: "start",
-        value: "name",
+        align: 'center',
       },
-      { text: "Calories", value: "calories" },
-      { text: "Fat (g)", value: "fat" },
-      { text: "Carbs (g)", value: "carbs" },
-      { text: "Protein (g)", value: "protein" },
-      { text: "Iron (%)", value: "iron" },
+      { text: 'username', value: 'username' },
+      { text: 'password', value: 'password' },
     ],
     desserts: [
       {
-        name: "Frozen Yogurt",
-        calories: 159,
-        fat: 6.0,
-        carbs: 24,
-        protein: 4.0,
-        iron: 1,
+        username: 'rezvani2001',
+        password: 'Amir@1380',
       },
       {
-        name: "Ice cream sandwich",
-        calories: 237,
-        fat: 9.0,
-        carbs: 37,
-        protein: 4.3,
-        iron: 1,
+        username: 'rezvani2001',
+        password: 'Amir@1380',
       },
       {
-        name: "Eclair",
-        calories: 262,
-        fat: 16.0,
-        carbs: 23,
-        protein: 6.0,
-        iron: 7,
+        username: 'rezvani2001',
+        password: 'Amir@1380',
       },
       {
-        name: "Cupcake",
-        calories: 305,
-        fat: 3.7,
-        carbs: 67,
-        protein: 4.3,
-        iron: 8,
+        username: 'rezvani2001',
+        password: 'Amir@1380',
       },
       {
-        name: "Gingerbread",
-        calories: 356,
-        fat: 16.0,
-        carbs: 49,
-        protein: 3.9,
-        iron: 16,
+        username: 'rezvani2001',
+        password: 'Amir@1380',
       },
       {
-        name: "Jelly bean",
-        calories: 375,
-        fat: 0.0,
-        carbs: 94,
-        protein: 0.0,
-        iron: 0,
+        username: 'rezvani2001',
+        password: 'Amir@1380',
       },
       {
-        name: "Lollipop",
-        calories: 392,
-        fat: 0.2,
-        carbs: 98,
-        protein: 0,
-        iron: 2,
+        username: 'rezvani2001',
+        password: 'Amir@1380',
       },
       {
-        name: "Honeycomb",
-        calories: 408,
-        fat: 3.2,
-        carbs: 87,
-        protein: 6.5,
-        iron: 45,
+        username: 'rezvani2001',
+        password: 'Amir@1380',
       },
       {
-        name: "Donut",
-        calories: 452,
-        fat: 25.0,
-        carbs: 51,
-        protein: 4.9,
-        iron: 22,
+        username: 'rezvani2001',
+        password: 'Amir@1380',
       },
       {
-        name: "KitKat",
-        calories: 518,
-        fat: 26.0,
-        carbs: 65,
-        protein: 7,
-        iron: 6,
+        username: 'rezvani2001',
+        password: 'Amir@1380',
       },
     ],
   }),
+  components: {
+    AddDialogs,
+  },
+
+  methods: {
+    ruleRequired,
+
+    AddUser() {
+      if (!this.$refs.form.validate()) {
+        console.log('not valid');
+        return;
+      }
+
+      console.log('reached');
+    },
+  },
+  created() {
+    getOneUser().then((res) => {
+      console.log(res);
+    });
+  },
 };
 </script>

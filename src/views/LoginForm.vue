@@ -16,6 +16,7 @@
                     name="login"
                     label="نام کاربری"
                     type="text"
+                    :rules="[ruleRequired]"
                   ></v-text-field>
                   <v-text-field
                     id="password"
@@ -23,6 +24,7 @@
                     name="password"
                     label="رمز ورود"
                     type="password"
+                    :rules="[ruleRequired]"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
@@ -39,8 +41,9 @@
 </template>
 
 <script>
+import { ruleRequired } from '../helpers/rules';
 export default {
-  name: "LoginForm",
+  name: 'LoginForm',
   props: {
     source: String,
   },
@@ -50,6 +53,9 @@ export default {
       // firstname: "",
       // lastname: "",
     };
+  },
+  methods: {
+    ruleRequired,
   },
 };
 </script>
