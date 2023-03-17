@@ -1,8 +1,8 @@
 import request from './apiConfig';
 
-export async function getOneUser(param) {
+export async function getOneUser() {
   return await request({
-    url: `customers/${param}`,
+    url: `customers`,
     method: 'get',
   });
 }

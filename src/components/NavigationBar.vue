@@ -1,23 +1,57 @@
 <template>
   <div>
-    <v-app-bar color="grey darken-2" class="flex-grow-0" flat app dark>
+    <v-app-bar
+      :elevation="this.theme == 'light' ? 4 : 2"
+      :color="this.theme == 'dark' ? ' grey darken-2' : 'white'"
+      class="flex-grow-0"
+      flat
+      app
+      dark
+    >
       <v-app-bar-nav-icon
-        class="white--text"
+        :class="
+          this.theme == 'dark' ? 'white--text darken-4' : 'black--text darken-4'
+        "
         @click.stop="drawer = !drawer"
       ></v-app-bar-nav-icon>
-      <v-app-bar-title class="white--text text-h5"
-        >سامانه مدیریت گواهی
-      </v-app-bar-title>
+      <v-tool-bar-title
+        class="text-overflow-show"
+        :class="
+          this.theme == 'dark' ? 'white--text darken-4' : 'black--text darken-4'
+        "
+      >
+        <div>سامانه مدیریت گواهی</div>
+      </v-tool-bar-title>
       <v-spacer></v-spacer>
       <div class="icons">
-        <v-icon class="white--text darken-4">mdi-login</v-icon>
+        <v-icon
+          :class="
+            this.theme == 'dark'
+              ? 'white--text darken-4'
+              : 'black--text darken-4'
+          "
+          >mdi-login</v-icon
+        >
       </div>
     </v-app-bar>
-    <v-navigation-drawer flat dark right app v-model="drawer" bottom>
+    <v-navigation-drawer
+      :dark="this.theme == 'dark' ? '' : dark"
+      :elevation="this.theme == 'light' ? 4 : 2"
+      flat
+      right
+      app
+      v-model="drawer"
+      bottom
+    >
       <v-list-item>
         <v-list-item-content class="text-center">
           <v-list-item-subtitle class="text-h5 gray--text darken-4"
-            ><v-icon>mdi-view-dashboard</v-icon></v-list-item-subtitle
+            ><v-icon
+              @click="themeHandler()"
+              :color="this.theme == 'dark' ? 'white' : 'yellow'"
+            >
+              {{ iconTheme }}
+            </v-icon></v-list-item-subtitle
           >
         </v-list-item-content>
       </v-list-item>
@@ -43,10 +77,15 @@ export default {
   name: 'NavigationBar',
   data: () => ({
     drawer: false,
+    theme: 'dark',
+    iconTheme: 'mdi-weather-night',
     // items: [
     //   { title: "Dashboard", icon: "mdi-view-dashboard" },
     //   { title: "Account", icon: "mdi-account-box" },
-    //   { title: "Settings", icon: "mdi-cog" },
+    //   { title: "Settings", icon: "mdi-cog"  },
+
+    //  /mdi - white - balance - sunny
+    ///mdi - weather - night//
     // ],
     items: [
       { title: 'داشبورد', icon: 'mdi-menu-down' },
@@ -71,7 +110,21 @@ export default {
         this.$router.push('Projects');
       }
     },
+    themeHandler() {
+      if (this.theme == 'dark') {
+        this.theme = 'light';
+        this.iconTheme = 'mdi-white-balance-sunny';
+        console.log(this.theme, this.iconTheme);
+      } else {
+        this.theme = 'dark';
+        this.iconTheme = 'mdi-weather-night';
+      }
+    },
   },
 };
 </script>
-<style scoped></style>
+<style scoped>
+.v-icon {
+  transition: all 0.4s;
+}
+</style>

@@ -32,4 +32,8 @@ export default {
 /* .v-application {
  background-color: #bdbdbd !important; 
 } */
+@import url('./assets/css/style.css');
+.v-application {
+  font-family: 'Sans\ a4fran3' !important;
+}
 </style>

@@ -1,8 +1,8 @@
 import request from './apiConfig';
 
-export async function getOneLicense(param) {
+export async function getOneLicense() {
   return await request({
-    url: `licenses/${param}`,
+    url: `licenses`,
     method: 'get',
   });
 }

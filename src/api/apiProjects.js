@@ -1,8 +1,8 @@
 import request from './apiConfig';
 
-export async function getOneProject(param) {
+export async function getOneProject() {
   return await request({
-    url: `projects/${param}`,
+    url: `projects`,
     method: 'get',
   });
 }

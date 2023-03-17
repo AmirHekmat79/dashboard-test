@@ -44,7 +44,7 @@
 <script>
 import { getOneUser } from '@/api/apiUsers';
 import AddDialogs from '@/components/AddDialogs.vue';
-import {ruleRequired} from '../helpers/rules'
+import { ruleRequired } from '../helpers/rules';
 
 export default {
   data: () => ({

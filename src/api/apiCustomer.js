@@ -1,8 +1,8 @@
 import request from './apiConfig';
 
-export function getOneCustomer(param) {
+export function getOneCustomer() {
   return request({
-    url: `customers/${param}`,
+    url: `customers`,
     method: 'get',
   });
 }
