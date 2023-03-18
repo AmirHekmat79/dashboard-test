@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuetify from "vuetify/lib/framework";
 import fa from "vuetify/es5/locale/fa";
-// import './assets/css/style.css';
 Vue.use(Vuetify);
 
 export default new Vuetify({
