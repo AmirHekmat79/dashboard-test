@@ -1,12 +1,30 @@
+@font-face {
+    font-family: IRANSans;
+    font-style: normal;
+    font-weight: 300;
+    src: url('~/src/assets/Fonts/Iransans.ttf');
+}
 
-@font-face{
+html, body, a {
+    font-family: "IRANSans", Arial, Helvetica, sans-serif !important;
+}
 
-    src:url("../Fonts/Sans\ a4fran3.ttf");
-    
-    font-family:"iransans" ;
-    
-    }
+.v-application {
+    font-family: "IRANSans", Arial, Helvetica, sans-serif !important;
+}
 
-    *{
-        font-family:"iransans" !important;
-    }
+.v-application .title {
+    font-family: "IRANSans", Arial, Helvetica, sans-serif !important;
+}
+
+.v-application .headline {
+    font-family: "IRANSans", Arial, Helvetica, sans-serif !important;
+}
+
+.v-application [class*='text-'] {
+    font-family: "IRANSans", Arial, Helvetica, sans-serif !important;
+}
+
+.v-application [class*='subtitle-'] {
+    font-family: "IRANSans", Arial, Helvetica, sans-serif !important;
+}
