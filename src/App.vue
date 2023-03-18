@@ -30,17 +30,9 @@ export default {
 </script>
 
 <style>
+@import url('./assets/css/style.css');
+
 /* .v-application {
  background-color: #bdbdbd !important; 
 } */
-@import url('./assets/css/style.css');
-.v-app,
-.v-application,
-.v-application-wrap,
-.v-navigation-drawer,
-.v-app-bar,
-html,
-body {
-  font-family: 'iransans' !important;
-}
 </style>
