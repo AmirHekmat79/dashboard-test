@@ -1,3 +1,4 @@
+/* import fonts */
 @font-face {
     font-family: IRANSans;
     font-style: normal;
@@ -5,6 +6,7 @@
     src: url('~/src/assets/Fonts/Iransans.ttf');
 }
 
+/* apply fonts throughout entire application */
 html, body, a {
     font-family: "IRANSans", Arial, Helvetica, sans-serif !important;
 }
@@ -27,4 +29,18 @@ html, body, a {
 
 .v-application [class*='subtitle-'] {
     font-family: "IRANSans", Arial, Helvetica, sans-serif !important;
+}
+
+/* vuetify: redundant buttons letter spacing */
+.v-application--is-rtl .v-btn {
+    letter-spacing: 0 !important;
+}
+
+.v-application--is-rtl .v-tab {
+    letter-spacing: 0 !important;
+}
+
+.v-application--is-rtl .v-card__title {
+    letter-spacing: 0 !important;
+    word-break: normal !important;
 }
