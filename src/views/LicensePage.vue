@@ -37,7 +37,7 @@
     <v-data-table
       :headers="headers"
       :items="desserts"
-      dark
+      
       class="text-center elevation-4 font-weight-bold"
     >
       <template v-slot:[`header.name`]="{ header }">

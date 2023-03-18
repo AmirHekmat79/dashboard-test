@@ -3,10 +3,10 @@
 
     src:url("../Fonts/Sans\ a4fran3.ttf");
     
-    font-family:"Sans\ a4fran3";
+    font-family:"iransans" ;
     
     }
 
     *{
-        font-family:"Sans\ a4fran3";
+        font-family:"iransans" !important;
     }

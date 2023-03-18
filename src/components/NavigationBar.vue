@@ -1,54 +1,27 @@
 <template>
   <div>
     <v-app-bar
-      :elevation="this.theme == 'light' ? 4 : 2"
-      :color="this.theme == 'dark' ? ' grey darken-2' : 'white'"
+      :elevation="this.$vuetify.theme.dark ? 2 : 6"
       class="flex-grow-0"
       flat
       app
-      dark
     >
-      <v-app-bar-nav-icon
-        :class="
-          this.theme == 'dark' ? 'white--text darken-4' : 'black--text darken-4'
-        "
-        @click.stop="drawer = !drawer"
-      ></v-app-bar-nav-icon>
-      <v-tool-bar-title
-        class="text-overflow-show"
-        :class="
-          this.theme == 'dark' ? 'white--text darken-4' : 'black--text darken-4'
-        "
-      >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>
         <div>سامانه مدیریت گواهی</div>
-      </v-tool-bar-title>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="icons">
-        <v-icon
-          :class="
-            this.theme == 'dark'
-              ? 'white--text darken-4'
-              : 'black--text darken-4'
-          "
-          >mdi-login</v-icon
-        >
+        <v-icon>mdi-login</v-icon>
       </div>
     </v-app-bar>
-    <v-navigation-drawer
-      :dark="this.theme == 'dark' ? '' : dark"
-      :elevation="this.theme == 'light' ? 4 : 2"
-      flat
-      right
-      app
-      v-model="drawer"
-      bottom
-    >
+    <v-navigation-drawer flat right app v-model="drawer" bottom>
       <v-list-item>
         <v-list-item-content class="text-center">
           <v-list-item-subtitle class="text-h5 gray--text darken-4"
             ><v-icon
               @click="themeHandler()"
-              :color="this.theme == 'dark' ? 'white' : 'yellow'"
+              :color="this.$vuetify.theme.dark ? 'yellow' : 'secondary'"
             >
               {{ iconTheme }}
             </v-icon></v-list-item-subtitle
@@ -77,8 +50,7 @@ export default {
   name: 'NavigationBar',
   data: () => ({
     drawer: false,
-    theme: 'dark',
-    iconTheme: 'mdi-weather-night',
+    iconTheme: 'mdi-white-balance-sunny',
     // items: [
     //   { title: "Dashboard", icon: "mdi-view-dashboard" },
     //   { title: "Account", icon: "mdi-account-box" },
@@ -111,19 +83,27 @@ export default {
       }
     },
     themeHandler() {
-      if (this.theme == 'dark') {
-        this.theme = 'light';
+      if (this.$vuetify.theme.dark == false) {
         this.iconTheme = 'mdi-white-balance-sunny';
-        console.log(this.theme, this.iconTheme);
+        this.$vuetify.theme.dark = true;
       } else {
-        this.theme = 'dark';
         this.iconTheme = 'mdi-weather-night';
+        this.$vuetify.theme.dark = false;
       }
     },
   },
+
+  // watch: {
+  //   theme(value) {
+  //     // this.$emit('displayTheme', value);
+  //     this.$emit('displayTheme', value);
+  //     console.log(value)
+  //   },
+  // },
 };
 </script>
 <style scoped>
+/* @import url('../assets/Fonts/Sans\ a4fran3.ttf'); */
 .v-icon {
   transition: all 0.4s;
 }

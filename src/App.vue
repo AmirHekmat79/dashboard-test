@@ -1,7 +1,8 @@
 <template>
   <v-app>
     <NavigationBar v-if="!$route.meta.hideNavbar" />
-    <v-main style="background-color: #f8f8f8">
+
+    <v-main style="background-color: #ecf0f1">
       <router-view></router-view>
     </v-main>
   </v-app>
@@ -33,7 +34,13 @@ export default {
  background-color: #bdbdbd !important; 
 } */
 @import url('./assets/css/style.css');
-.v-application {
-  font-family: 'Sans\ a4fran3' !important;
+.v-app,
+.v-application,
+.v-application-wrap,
+.v-navigation-drawer,
+.v-app-bar,
+html,
+body {
+  font-family: 'iransans' !important;
 }
 </style>

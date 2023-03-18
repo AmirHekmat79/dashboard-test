@@ -41,8 +41,7 @@
     <v-data-table
       :headers="headers"
       :items="desserts"
-      dark
-      class="text-center elevation-2 font-weight-bold"
+      class="text-center elevation-4 font-weight-bold"
     >
       <template v-slot:[`header.name`]="{ header }">
         {{ header.text.toUpperCase() }}
@@ -56,7 +55,7 @@ import AddDialogs from '@/components/AddDialogs.vue';
 import { getOneCustomer } from '@/api/apiCustomer';
 // import { validateCustomerName } from '@/helpers/rules';
 import { validateCustomerName } from '../helpers/rules';
-import {ruleRequired} from '../helpers/rules'
+import { ruleRequired } from '../helpers/rules';
 export default {
   data() {
     return {
