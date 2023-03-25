@@ -8,7 +8,7 @@
       </template>
 
       <v-card>
-        <v-card-title class="text-h6 grey lighten-2">
+        <v-card-title class="text-h6 white black--text">
           {{ title }}
         </v-card-title>
 
@@ -20,7 +20,9 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="red" text @click="dialog = false"> بستن </v-btn>
+          <v-btn color="red" text @click="dialog = false">
+            {{ $t('close') }}
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

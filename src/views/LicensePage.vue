@@ -4,40 +4,39 @@
       elevation="4"
       class="pa-4 page-title-container text-center d-flex justify-space-around items-center ma-6"
     >
-      <v-btn elevation="5" color="warning"> رفرش جدول</v-btn>
-      <h4 class="text--gray px-5">جدول لایسنس ها</h4>
+      <v-btn elevation="5" color="warning">{{ $t('refreshingTable') }}</v-btn>
+      <h4 class="text--gray px-5">{{ $t('LicensesTable') }}</h4>
       <AddDialogs
-        title="اطلاعات لایسنس مورد نظر را وارد کنید"
-        btnTitle="افزودن لایسنس"
+        :title="$t('modalLicenseTitleForm')"
+        :btnTitle="$t('AddLicenseBtn')"
       >
         <v-form ref="form" lazy-validation>
           <v-text-field
             v-model="validityDuration"
-            label="مدت اعتبار"
+            :label="$t('validityDuration')"
             :rules="[validateCustomerName]"
           ></v-text-field>
 
           <v-text-field
             v-model="customerName"
-            label="نام مشتری"
+            :label="$t('customerName')"
             :rules="[validateCustomerName]"
           ></v-text-field>
 
           <v-text-field
             v-model="projectName"
-            label="نام پروژه"
+            :label="$t('projectName')"
             :rules="[validateCustomerName]"
             required
           ></v-text-field>
 
-          <v-btn color="warning" @click="AddLicense"> افزودن </v-btn>
+          <v-btn color="warning" @click="AddLicense"> {{ $t('Add') }} </v-btn>
         </v-form>
       </AddDialogs>
     </v-card>
     <v-data-table
       :headers="headers"
       :items="desserts"
-      
       class="text-center elevation-4 font-weight-bold"
     >
       <template v-slot:[`header.name`]="{ header }">
@@ -63,9 +62,9 @@ export default {
         {
           align: 'center',
         },
-        { text: 'validityDuration', value: 'validityDuration' },
-        { text: ' customerName', value: 'customerName' },
-        { text: 'projectName', value: 'projectName' },
+        { text: this.$t('validityDuration'), value: 'validityDuration' },
+        { text: this.$t('customerName'), value: 'customerName' },
+        { text: this.$t('projectName'), value: 'projectName' },
       ],
       desserts: [
         {
@@ -155,7 +154,6 @@ export default {
     AddDialogs,
   },
   methods: {
-    
     validateCustomerName,
     AddLicense() {
       if (!this.$refs.form.validate()) {

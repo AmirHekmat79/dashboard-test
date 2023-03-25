@@ -8,7 +8,7 @@
             ><h3 class="py-3 mx-auto">{{ card.counts }}</h3></v-card-title
           >
           <v-card-subtitle>
-            {{ card.item }}
+            {{ $t(card.item) }}
           </v-card-subtitle>
         </v-card>
       </v-col>
@@ -17,7 +17,9 @@
       <v-col col="4">
         <v-card class="elevation-4 text-center">
           <v-card-title class="font-weight-bold"
-            ><h3 class="mx-auto">وضعیت مشتری ها</h3></v-card-title
+            ><h3 class="mx-auto">
+              {{ $t('customerChartTitleCard') }}
+            </h3></v-card-title
           >
           <ColumnChart :xAxis="chart.xAxis" :series="chart.customers" />
         </v-card>
@@ -25,7 +27,9 @@
       <v-col col="4">
         <v-card class="elevation-4">
           <v-card-title class="font-weight-bold"
-            ><h3 class="mx-auto">وضعیت پروژه ها</h3></v-card-title
+            ><h3 class="mx-auto">
+              {{ $t('projectChartTitleCard') }}
+            </h3></v-card-title
           >
           <LineChart :xAxis="chart.xAxis" :series="chart.projects" />
         </v-card>
@@ -33,7 +37,9 @@
       <v-col col="4">
         <v-card class="elevation-4">
           <v-card-title class="font-weight-bold"
-            ><h3 class="mx-auto">وضعیت کاربران</h3></v-card-title
+            ><h3 class="mx-auto">
+              {{ $t('usersChartTitleCard') }}
+            </h3></v-card-title
           >
           <ColumnChart :xAxis="chart.xAxis" :series="chart.users" />
         </v-card>
@@ -75,12 +81,12 @@ export default {
         users: [
           // config here
           {
-            name: 'کاربران فعال',
+            name: this.$t('UsersActiveStatus'),
             color: '#2f7ed8',
             data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175],
           },
           {
-            name: 'کاربران غیر فعال',
+            name: this.$t('UsersInActiveStatus'),
             color: '#0d233a',
             data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434],
           },
@@ -88,12 +94,12 @@ export default {
         projects: [
           // config here
           {
-            name: 'پروژه فعال',
+            name: this.$t('ActiveStatusProject'),
             color: '#03bbd4',
             data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175],
           },
           {
-            name: 'پروژه غیر فعال',
+            name: this.$t('InActiveStatusProject'),
             color: '#f7a35c',
             data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434],
           },
@@ -101,48 +107,34 @@ export default {
         customers: [
           // config here
           {
-            name: 'مشتری ها ',
+            name: this.$t('customersRateChartSubtitle'),
             color: '#03bbd4',
             data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175],
           },
-          // {
-          //   name: 'پروژه غیر فعال',
-          //   color: '#f7a35c',
-          //   data: [24916, 24064, 29742, 29851, 32490, 30282, 38121, 40434],
-          // },
         ],
-        //   config: {
-        //     colors: ['#2f7ed8', '#0d233a'],
-        //     credits: {
-        //       enabled: true
-        //     },
-        //     // caption: {
-        //     //   text: '<b>The caption renders in the bottom, and is part of the exported chart.</b>'
-        //     // }
-        // },
       },
 
       cards: [
         {
-          item: 'پیام ها',
+          item: 'Messages',
           icon: 'mdi-bell',
           counts: 853,
           Color: 'warning',
         },
         {
-          item: 'سود امروز',
+          item: 'TodaysProfit',
           icon: 'mdi-bank',
           counts: '$' + 3521,
           Color: 'success',
         },
         {
-          item: 'مشتری ها',
+          item: 'customersRateChartSubtitle',
           icon: 'mdi-account',
           counts: 562,
           Color: 'primary',
         },
         {
-          item: 'پشتیبانی',
+          item: 'support',
           icon: 'mdi-heart',
           counts: 353,
           Color: 'red',

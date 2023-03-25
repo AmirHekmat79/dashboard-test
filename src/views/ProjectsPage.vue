@@ -4,26 +4,26 @@
       elevation="4"
       class="pa-4 page-title-container text-center d-flex justify-space-around items-center ma-6"
     >
-      <v-btn elevation="5" color="warning"> رفرش جدول</v-btn>
-      <h4 class="text--gray px-5">جدول پروژه ها</h4>
+      <v-btn elevation="5" color="warning">{{ $t('refreshingTable') }} </v-btn>
+      <h4 class="text--gray px-5">{{ $t('ProjectsTable') }}</h4>
 
       <AddDialogs
-        title="اطلاعات پروژه مورد نظر را وارد کنید"
-        btnTitle="افزودن پروژه"
+        :title="$t('modalProjectTitleForm')"
+        :btnTitle="$t('AddProjectBtn')"
       >
         <v-form ref="form" lazy-validation>
           <v-text-field
             v-model="name"
-            label="اسم"
+            :label="$t('name')"
             :rules="[ruleRequired]"
           ></v-text-field>
           <v-text-field
             v-model="description"
-            label="توضیحات"
+            :label="$t('description')"
             :rules="[ruleRequired]"
           ></v-text-field>
 
-          <v-btn color="warning" @click="AddProject"> افزودن </v-btn>
+          <v-btn color="warning" @click="AddProject"> {{ $t('Add') }} </v-btn>
         </v-form>
       </AddDialogs>
     </v-card>

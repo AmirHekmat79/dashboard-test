@@ -4,37 +4,41 @@
       elevation="4"
       class="pa-4 page-title-container text-center d-flex justify-space-around items-center ma-6"
     >
-      <v-btn elevation="5" color="warning"> رفرش جدول</v-btn>
-      <h4 class="text--gray px-5">جدول مشتری ها</h4>
+      <v-btn elevation="5" color="warning">{{ $t('refreshingTable') }}</v-btn>
+      <h4 class="text--gray px-5">{{ $t('CutomersTable') }}</h4>
       <AddDialogs
-        title="اطلاعات مشتری مورد نظر را وارد کنید"
-        btnTitle="افزودن مشتری"
+        :title="$t('modalCustomerTitleForm')"
+        :btnTitle="$t('AddCustomerBtn')"
       >
         <v-form ref="form" lazy-validation>
           <v-text-field
             v-model="username"
-            label="نام کاربری"
+            :label="$t('Username')"
             :rules="[validateCustomerName]"
           ></v-text-field>
 
-          <v-text-field v-model="email" label="ایمیل" required></v-text-field>
+          <v-text-field
+            v-model="email"
+            :label="$t('email')"
+            required
+          ></v-text-field>
           <v-text-field
             v-model="password"
-            label="رمز عبور"
+            :label="$t('Password')"
             :rules="[validateCustomerName]"
           ></v-text-field>
           <v-text-field
             v-model="address"
-            label="آدرس"
+            :label="$t('address')"
             :rules="[validateCustomerName]"
           ></v-text-field>
           <v-text-field
             v-model="phoneNumber"
-            label="شماره تلفن"
+            :label="$t('phoneNumber')"
             :rules="[validateCustomerName]"
           ></v-text-field>
 
-          <v-btn color="warning" @click="AddCustomer"> افزودن </v-btn>
+          <v-btn color="warning" @click="AddCustomer"> {{ $t('Add') }} </v-btn>
         </v-form>
       </AddDialogs>
     </v-card>
@@ -68,11 +72,11 @@ export default {
         {
           align: 'center',
         },
-        { text: 'name', value: 'name' },
-        { text: 'email', value: 'email' },
-        { text: 'address', value: 'address' },
-        { text: 'phoneNumber', value: 'phoneNumber' },
-        { text: 'password', value: 'password' },
+        { text: this.$t('name'), value: 'name' },
+        { text: this.$t('email'), value: 'email' },
+        { text: this.$t('address'), value: 'address' },
+        { text: this.$t('phoneNumber'), value: 'phoneNumber' },
+        { text: this.$t('Password'), value: 'password' },
       ],
       desserts: [
         {

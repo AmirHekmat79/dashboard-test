@@ -8,7 +8,7 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <div>سامانه مدیریت گواهی</div>
+        <div>{{ $t('dashboarMainTitle') }}</div>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="icons">
@@ -33,7 +33,9 @@
         <v-list-item v-for="item in items" :key="item.title" link>
           <v-list-item-content>
             <v-list-item-title @click="navigatePages(item.title)"
-              ><span class="text-h6">{{ item.title }}</span></v-list-item-title
+              ><span class="text-h6">{{
+                $t(item.title)
+              }}</span></v-list-item-title
             >
           </v-list-item-content>
           <v-list-item-icon>
@@ -60,23 +62,23 @@ export default {
     ///mdi - weather - night//
     // ],
     items: [
-      { title: 'داشبورد', icon: 'mdi-menu-down' },
-      { title: 'کاربر', icon: 'mdi-menu-down' },
-      { title: 'لایسنس ها', icon: 'mdi-menu-down' },
-      { title: 'پروژه', icon: 'mdi-menu-down' },
-      { title: 'مشتری', icon: 'mdi-menu-down' },
+      { title: 'dashboard', icon: 'mdi-menu-down' },
+      { title: 'user', icon: 'mdi-menu-down' },
+      { title: 'licenses', icon: 'mdi-menu-down' },
+      { title: 'project', icon: 'mdi-menu-down' },
+      { title: 'customer', icon: 'mdi-menu-down' },
     ],
   }),
   methods: {
     navigatePages(title) {
       console.log(title);
-      if (title == 'مشتری') {
+      if (title == 'مشتری' || title == 'customer') {
         this.$router.push('Customers');
-      } else if (title == 'کاربر') {
+      } else if (title == 'کاربر' || title == 'user') {
         this.$router.push('Users');
-      } else if (title == 'لایسنس ها') {
+      } else if (title == 'لایسنس ها' || title == 'licenses') {
         this.$router.push('Licenses');
-      } else if (title == 'داشبورد') {
+      } else if (title == 'داشبورد' || title == 'dashboard') {
         this.$router.push('/');
       } else {
         this.$router.push('Projects');
