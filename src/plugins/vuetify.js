@@ -1,19 +1,19 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
-// import fa from 'vuetify/es5/locale/fa';
+import fa from 'vuetify/es5/locale/fa';
 import VueI18n from 'vue-i18n';
-import i18n from './i18n';
+
 Vue.use(Vuetify);
 Vue.use(VueI18n);
 
 export default new Vuetify({
-  // lang: {
-  //   locales: { fa },
-  //   current: 'fa',
-  // },
   lang: {
-    t: (key, ...params) => i18n.t(key, params),
+    locales: { fa },
+    current: 'fa',
   },
+  // lang: {
+  //   t: (key, ...params) => i18n.t(key, params),
+  // },
   icons: {
     iconfont: 'mdi' || 'md' || 'fa' || 'fa4',
   },
@@ -33,4 +33,9 @@ export default new Vuetify({
       primary: '#ffffff',
     },
   },
+  // gridOptions: {
+  //   localeText: {
+  //     rowsPerPage: i18n.t('rowsPerPage').toString(),
+  //   },
+  // },
 });

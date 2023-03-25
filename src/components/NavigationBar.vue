@@ -11,8 +11,14 @@
         <div>{{ $t('dashboarMainTitle') }}</div>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <div class="icons">
-        <v-icon>mdi-login</v-icon>
+      <div class="icons d-flex justify-center items-center">
+        <v-switch
+          class="mx-5"
+          v-model="switch1"
+          :label="`${switch1 ? 'En' : 'Fa'}`"
+          @toggle="switch1 = !switch1"
+        ></v-switch>
+        <span><v-icon>mdi-login</v-icon></span>
       </div>
     </v-app-bar>
     <v-navigation-drawer flat right app v-model="drawer" bottom>
@@ -48,9 +54,13 @@
 </template>
 
 <script>
+import i18n from '@/plugins/i18n';
+// const elems = document.getElementsByTagName('*');
 export default {
   name: 'NavigationBar',
   data: () => ({
+    switch1: true,
+    locale: 'En',
     drawer: false,
     iconTheme: 'mdi-white-balance-sunny',
     // items: [
@@ -93,20 +103,41 @@ export default {
         this.$vuetify.theme.dark = false;
       }
     },
+
+    // changeLocale(switch1) {
+    //   if (switch1) {
+    //     this.switch1 = false;
+    //   } else {
+    //     this.switch1 = true;
+    //   }
+    // },
   },
 
-  // watch: {
-  //   theme(value) {
-  //     // this.$emit('displayTheme', value);
-  //     this.$emit('displayTheme', value);
-  //     console.log(value)
-  //   },
-  // },
+  watch: {
+    switch1(value) {
+      if (value) {
+        i18n.locale = 'En';
+        // for (let elem of elems) {
+        //   elem.style.direction = 'ltr';
+        // }
+        this.$vuetify.framework.lang.current = i18n.locale;
+      } else {
+        i18n.locale = 'fa';
+        // for (let elem of elems) {
+        //   elem.style.direction = 'rtl';
+        // }
+        this.$vuetify.framework.lang.current = i18n.locale;
+      }
+    },
+  },
 };
 </script>
 <style scoped>
 /* @import url('../assets/Fonts/Sans\ a4fran3.ttf'); */
 .v-icon {
   transition: all 0.4s;
+}
+.icons {
+  margin-top: 22px;
 }
 </style>

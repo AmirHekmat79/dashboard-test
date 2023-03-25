@@ -35,6 +35,7 @@
       </AddDialogs>
     </v-card>
     <v-data-table
+      :items-per-page="rowsPerPage"
       :headers="headers"
       :items="desserts"
       class="text-center elevation-4 font-weight-bold"
