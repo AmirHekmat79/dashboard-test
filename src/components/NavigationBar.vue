@@ -117,16 +117,16 @@ export default {
     switch1(value) {
       if (value) {
         i18n.locale = 'En';
+        location.reload();
         // for (let elem of elems) {
         //   elem.style.direction = 'ltr';
         // }
-        this.$vuetify.framework.lang.current = i18n.locale;
       } else {
         i18n.locale = 'fa';
+        location.reload();
         // for (let elem of elems) {
         //   elem.style.direction = 'rtl';
         // }
-        this.$vuetify.framework.lang.current = i18n.locale;
       }
     },
   },
