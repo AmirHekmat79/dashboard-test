@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify/lib/framework';
 import fa from 'vuetify/es5/locale/fa';
+import en from 'vuetify/es5/locale/en';
 import VueI18n from 'vue-i18n';
 
 Vue.use(Vuetify);
@@ -8,7 +9,7 @@ Vue.use(VueI18n);
 
 export default new Vuetify({
   lang: {
-    locales: { fa },
+    locales: { fa , en},
     current: 'fa',
   },
   // lang: {

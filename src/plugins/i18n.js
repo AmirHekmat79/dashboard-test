@@ -48,6 +48,8 @@ const messages = {
     customerName: 'customer name',
     projectName: 'project name',
     address: 'address',
+    itemsPerPageText: 'row per page :',
+   
   },
   fa: {
     dashboarMainTitle: 'سامانه مدیریت گواهی',
@@ -94,12 +96,13 @@ const messages = {
     customerName: 'اسم مشتری',
     projectName: 'اسم پروژه',
     address: 'آدرس',
+    itemsPerPageText: 'ردیف در صفحه:',
   },
 };
 
 const i18n = new VueI18n({
-  locale: 'en', // set locale
-  fallbackLocale: 'en', // set fallback locale
+  locale: 'fa', // set locale
+  fallbackLocale: 'fa', // set fallback locale
   messages, // set locale messages
 });
 export default i18n;

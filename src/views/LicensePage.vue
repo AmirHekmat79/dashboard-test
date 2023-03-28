@@ -35,9 +35,9 @@
       </AddDialogs>
     </v-card>
     <v-data-table
-      :items-per-page="rowsPerPage"
-      :headers="headers"
-      :items="desserts"
+      
+      :headers="getHeaders"
+      :items="licenseDetails"
       class="text-center elevation-4 font-weight-bold"
     >
       <template v-slot:[`header.name`]="{ header }">
@@ -55,19 +55,19 @@ export default {
   data() {
     return {
       validityDuration: null,
+      customerName : null ,
+      projectName : null,
+     
 
-      address: null,
-      phoneNumber: null,
-
-      headers: [
-        {
-          align: 'center',
-        },
-        { text: this.$t('validityDuration'), value: 'validityDuration' },
-        { text: this.$t('customerName'), value: 'customerName' },
-        { text: this.$t('projectName'), value: 'projectName' },
-      ],
-      desserts: [
+      // headers: [
+      //   {
+      //     align: 'center',
+      //   },
+      //   { text: this.$t('validityDuration'), value: 'validityDuration' },
+      //   { text: this.$t('customerName'), value: 'customerName' },
+      //   { text: this.$t('projectName'), value: 'projectName' },
+      // ],
+      licenseDetails: [
         {
           validityDuration: 86400,
           parameters: {
@@ -161,6 +161,17 @@ export default {
         console.log('not valid');
         return;
       }
+    },
+  },
+  computed: {
+    getHeaders() {
+      const t = this.$t.bind(this);
+      return [
+        {align : 'center'},
+        { text: t('validityDuration'), value: 'validityDuration' },
+        { text: t('customerName'), value: 'customerName' },
+        { text: t('projectName'), value: 'projectName' },
+      ];
     },
   },
   created() {

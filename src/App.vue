@@ -2,7 +2,7 @@
   <v-app>
     <NavigationBar v-if="!$route.meta.hideNavbar" />
 
-    <v-main style="background-color: #ecf0f1">
+    <v-main>
       <router-view></router-view>
     </v-main>
   </v-app>
@@ -27,8 +27,6 @@ export default {
     NavigationBar,
   },
 };
-
-
 </script>
 
 <style>

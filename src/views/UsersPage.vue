@@ -29,8 +29,9 @@
       </AddDialogs>
     </v-card>
     <v-data-table
-      :headers="headers"
-      :items="desserts"
+     :footer-props = "{'items-per-page-text':this.$t('itemsPerPageText')}"
+      :headers="getHeaders"
+      :items="usersDetails"
       class="elevation-4 font-weight-bold"
     >
       <template v-slot:[`header.name`]="{ header }">
@@ -50,14 +51,14 @@ export default {
     username: null,
     password: null,
 
-    headers: [
-      {
-        align: 'center',
-      },
-      { text: 'Username', value: 'username' },
-      { text: 'Password', value: 'password' },
-    ],
-    desserts: [
+    // headers: [
+    //   {
+    //     align: 'center',
+    //   },
+    //   { text: 'Username', value: 'username' },
+    //   { text: 'Password', value: 'password' },
+    // ],
+    usersDetails: [
       {
         username: 'rezvani2001',
         password: 'Amir@1380',
@@ -115,6 +116,23 @@ export default {
 
       console.log('reached');
     },
+  },
+  computed: {
+    getHeaders() {
+      const t = this.$t.bind(this);
+      return [
+        { align: 'center' },
+        { text: t('Username'), value: 'username' },
+        { text: t('Password'), value: 'password' },
+      ];
+    },
+    // rowPerPageLocale() {
+    //   if (this.$i18n.locale == 'fa') {
+    //     return 'ردیف در صفحه:';
+    //   } else {
+    //     return 'rows per page:';
+    //   }
+    // },
   },
   created() {
     getOneUser().then((res) => {

@@ -28,8 +28,8 @@
       </AddDialogs>
     </v-card>
     <v-data-table
-      :headers="headers"
-      :items="desserts"
+      :headers="getHeaders"
+      :items="projectsDetails"
       class="text-center elevation-4 font-weight-bold"
     >
       <template v-slot:[`header.name`]="{ header }">
@@ -49,62 +49,65 @@ export default {
     name: null,
     customerName: null,
 
-    headers: [
-      {
-        align: 'center',
-      },
-      { text: 'name', value: 'name' },
-      { text: 'description', value: 'description' },
-    ],
-    desserts: [
+    // headers: [
+    //   {
+    //     align: 'center',
+    //   },
+    //   { text: 'name', value: 'name' },
+    //   {
+    //     text: 'description',
+    //     value: 'description',
+    //   },
+    // ],
+    projectsDetails: [
       {
         name: 'passw',
-        parameters: ['hi'],
+        // parameters: ['hi'],
         description: 'password manager',
       },
       {
         name: 'passw',
-        parameters: ['hi'],
+        // parameters: ['hi'],
         description: 'password manager',
       },
       {
         name: 'passw',
-        parameters: ['hi'],
+        // parameters: ['hi'],
         description: 'password manager',
       },
       {
         name: 'passw',
-        parameters: ['hi'],
+        // parameters: ['hi'],
         description: 'password manager',
       },
       {
         name: 'passw',
-        parameters: ['hi'],
+        // parameters: ['hi'],
         description: 'password manager',
       },
       {
         name: 'passw',
-        parameters: ['hi'],
+        // parameters: ['hi'],
         description: 'password manager',
       },
       {
         name: 'passw',
-        parameters: ['hi'],
+        // parameters: ['hi'],
         description: 'password manager',
       },
       {
         name: 'passw',
-        parameters: ['hi'],
+        // parameters: ['hi'],
         description: 'password manager',
       },
       {
         name: 'passw',
-        parameters: ['hi'],
+        // parameters: ['hi'],
         description: 'password manager',
       },
       {
         name: 'passw',
-        parameters: ['hi'],
+        // parameters: ['hi'],
         description: 'password manager',
       },
     ],
@@ -123,6 +126,17 @@ export default {
       }
 
       console.log('reached');
+    },
+    
+  },
+  computed: {
+    getHeaders() {
+      const t = this.$t.bind(this);
+      return [
+        {align : 'center'},
+        { text: t('name'), value: 'name' },
+        { text: t('description'), value: 'description' },
+      ];
     },
   },
   created() {

@@ -43,8 +43,8 @@
       </AddDialogs>
     </v-card>
     <v-data-table
-      :headers="headers"
-      :items="desserts"
+      :headers="getHeaders"
+      :items="customerDetails"
       class="text-center elevation-4 font-weight-bold"
     >
       <template v-slot:[`header.name`]="{ header }">
@@ -63,22 +63,12 @@ import { ruleRequired } from '../helpers/rules';
 export default {
   data() {
     return {
-      username: null,
+      name: null,
       email: null,
       password: null,
       phoneNumber: null,
-
-      headers: [
-        {
-          align: 'center',
-        },
-        { text: this.$t('name'), value: 'name' },
-        { text: this.$t('email'), value: 'email' },
-        { text: this.$t('address'), value: 'address' },
-        { text: this.$t('phoneNumber'), value: 'phoneNumber' },
-        { text: this.$t('Password'), value: 'password' },
-      ],
-      desserts: [
+      address: null,
+      customerDetails: [
         {
           name: 'amir',
           email: 'rezvani@gmail.com',
@@ -167,7 +157,19 @@ export default {
       }
     },
   },
-
+  computed: {
+    getHeaders() {
+      const t = this.$t.bind(this);
+      return [
+        { align: 'center' },
+        { text: t('name'), value: 'name' },
+        { text: t('email'), value: 'email' },
+        { text: t('phoneNumber'), value: 'phoneNumber' },
+        { text: t('address'), value: 'address' },
+        { text: t('Password'), value: 'password' },
+      ];
+    },
+  },
   created() {
     getOneCustomer().then((res) => {
       console.log(res);
