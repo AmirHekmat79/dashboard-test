@@ -7,13 +7,17 @@ export default new Vuex.Store({
   namespaced: true,
 
   state: {
-    darkTheme: false,
+    isDarkTheme: false,
     lang: "fa",
   },
 
   mutations: {
     setLang(state, payload) {
       state.lang = payload;
+    },
+
+    setIsDarkTheme(state, payload) {
+      state.isDarkTheme = payload;
     },
   },
 });

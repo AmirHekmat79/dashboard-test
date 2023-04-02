@@ -32,14 +32,14 @@
     >
       <v-list-item>
         <v-list-item-content class="text-center">
-          <v-list-item-subtitle class="text-h5 gray--text darken-4"
-            ><v-icon
+          <v-list-item-subtitle class="text-h5 gray--text darken-4">
+            <v-icon
               @click="themeHandler"
-              :color="this.$vuetify.theme.dark ? 'yellow' : 'secondary'"
+              :color="this.isDarkTheme ? 'yellow' : 'secondary'"
             >
               {{ iconTheme }}
-            </v-icon></v-list-item-subtitle
-          >
+            </v-icon>
+          </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
       <v-divider></v-divider>
@@ -63,7 +63,6 @@ export default {
   name: "NavigationBar",
   data: () => ({
     drawer: false,
-    iconTheme: "mdi-white-balance-sunny",
     items: [
       { title: "dashboard" },
       { title: "user" },
@@ -98,40 +97,26 @@ export default {
     },
 
     themeHandler() {
-      if (this.$vuetify.theme.dark == false) {
-        this.iconTheme = "mdi-white-balance-sunny";
-        this.$vuetify.theme.dark = true;
-        this.darkTheme = this.$vuetify.theme.dark;
-        console.log(this.darkTheme);
-        sessionStorage.setItem(
-          "darkTheme",
-          JSON.stringify(this.$vuetify.theme.dark)
-        );
-      } else {
-        this.iconTheme = "mdi-weather-night";
-        this.$vuetify.theme.dark = false;
-        sessionStorage.setItem(
-          "darkTheme",
-          JSON.stringify(this.$vuetify.theme.dark)
-        );
-      }
+      // change vuetify theme
+      this.$vuetify.theme.dark = !this.isDarkTheme;
+
+      // store selected theme in vuex and session storage
+      sessionStorage.setItem("isDark", !this.isDarkTheme);
+      this.$store.commit("setIsDarkTheme", !this.isDarkTheme);
     },
   },
 
-  mounted() {
-    const lastTheme = JSON.parse(sessionStorage.getItem("darkTheme"));
-    if (lastTheme == true) {
-      this.$vuetify.theme.dark = true;
-      this.iconTheme = "mdi-white-balance-sunny";
-    } else {
-      this.$vuetify.theme.dark = false;
-      this.iconTheme = "mdi-weather-night";
-    }
-  },
-
   computed: {
+    iconTheme() {
+      return this.isDarkTheme ? "mdi-white-balance-sunny" : "mdi-weather-night";
+    },
+
     lang() {
       return this.$store.state.lang;
+    },
+
+    isDarkTheme() {
+      return this.$store.state.isDarkTheme;
     },
   },
 };

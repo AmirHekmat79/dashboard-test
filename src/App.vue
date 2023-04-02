@@ -30,14 +30,15 @@ export default {
   mounted() {
     // initially set language
     const selectedLocale = sessionStorage.getItem("lang");
-
     this.$i18n.locale = selectedLocale;
     this.$vuetify.lang.current = selectedLocale;
     this.$vuetify.rtl = selectedLocale === "fa";
-    sessionStorage.setItem("lang", selectedLocale);
-
-    // store selected lang in vuex
     this.$store.commit("setLang", selectedLocale);
+
+    // initially set theme
+    const isDark = sessionStorage.getItem("isDark") === "true";
+    this.$vuetify.theme.dark = isDark;
+    this.$store.commit("setIsDarkTheme", isDark);
   },
 };
 </script>
