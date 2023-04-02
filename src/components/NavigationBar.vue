@@ -8,15 +8,17 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <div>{{ $t('dashboarMainTitle') }}</div>
+        <div>{{ $t("dashboarMainTitle") }}</div>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="icons d-flex justify-center items-center">
         <v-switch
           class="mx-5"
-          v-model="local"
-          :label="`${local ? 'fa' : 'en'}`"
-          @toggle="local = !local"
+          v-model="locale"
+          :label="locale.toUpperCase()"
+          false-value="en"
+          true-value="fa"
+          @change="onChangeLocale"
         ></v-switch>
         <span><v-icon>mdi-login</v-icon></span>
       </div>
@@ -32,7 +34,7 @@
         <v-list-item-content class="text-center">
           <v-list-item-subtitle class="text-h5 gray--text darken-4"
             ><v-icon
-              @click="themeHandler()"
+              @click="themeHandler"
               :color="this.$vuetify.theme.dark ? 'yellow' : 'secondary'"
             >
               {{ iconTheme }}
@@ -57,35 +59,41 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
-  name: 'NavigationBar',
+  name: "NavigationBar",
   data: () => ({
-    local: true,
-    locale: 'fa',
+    locale: "fa",
     drawer: false,
-    iconTheme: 'mdi-white-balance-sunny',
+    iconTheme: "mdi-white-balance-sunny",
     items: [
-      { title: 'dashboard' },
-      { title: 'user' },
-      { title: 'licenses' },
-      { title: 'project' },
-      { title: 'customer' },
+      { title: "dashboard" },
+      { title: "user" },
+      { title: "licenses" },
+      { title: "project" },
+      { title: "customer" },
     ],
   }),
   methods: {
+    onChangeLocale() {
+      this.$i18n.locale = this.locale;
+      this.$vuetify.lang.current = this.locale;
+      this.$vuetify.rtl = this.locale === "fa";
+      sessionStorage.setItem("lang", this.locale);
+    },
+
     navigatePages(title) {
-      if (title == 'مشتری' || title == 'customer') {
-        this.$router.push('/Customers');
-      } else if (title == 'کاربر' || title == 'user') {
-        this.$router.push('/Users');
-      } else if (title == 'لایسنس ها' || title == 'licenses') {
-        this.$router.push('/Licenses');
-      } else if (title == 'داشبورد' || title == 'dashboard') {
-        this.$router.push('/');
+      if (title === "مشتری" || title === "customer") {
+        this.$router.push("/Customers");
+      } else if (title === "کاربر" || title === "user") {
+        this.$router.push("/Users");
+      } else if (title === "لایسنس ها" || title === "licenses") {
+        this.$router.push("/Licenses");
+      } else if (title === "داشبورد" || title === "dashboard") {
+        this.$router.push("/");
       } else {
-        this.$router.push('/Projects');
+        this.$router.push("/Projects");
       }
     },
     // setThemeSession() {
@@ -96,22 +104,22 @@ export default {
     // },
     themeHandler() {
       if (this.$vuetify.theme.dark == false) {
-        this.iconTheme = 'mdi-white-balance-sunny';
+        this.iconTheme = "mdi-white-balance-sunny";
         this.$vuetify.theme.dark = true;
         // this.darkTheme(this.$vuetify.theme.dark);
         // this.setThemeSession() =  this.$vuetify.theme.dark;
         this.darkTheme = this.$vuetify.theme.dark;
         console.log(this.darkTheme);
         sessionStorage.setItem(
-          'darkTheme',
+          "darkTheme",
           JSON.stringify(this.$vuetify.theme.dark)
         );
       } else {
-        this.iconTheme = 'mdi-weather-night';
+        this.iconTheme = "mdi-weather-night";
         this.$vuetify.theme.dark = false;
         // this.darkTheme(this.$vuetify.theme.dark);
         sessionStorage.setItem(
-          'darkTheme',
+          "darkTheme",
           JSON.stringify(this.$vuetify.theme.dark)
         );
         // this.setThemeSession() =  this.$vuetify.theme.dark;
@@ -126,38 +134,21 @@ export default {
     // },
   },
   beforeCreate() {
-    this.$store.commit('initializeTheme');
+    this.$store.commit("initializeTheme");
   },
   mounted() {
-    const lastTheme = JSON.parse(sessionStorage.getItem('darkTheme'));
+    const lastTheme = JSON.parse(sessionStorage.getItem("darkTheme"));
     if (lastTheme == true) {
       this.$vuetify.theme.dark = true;
-      this.iconTheme = 'mdi-white-balance-sunny';
+      this.iconTheme = "mdi-white-balance-sunny";
     } else {
       this.$vuetify.theme.dark = false;
-      this.iconTheme = 'mdi-weather-night';
+      this.iconTheme = "mdi-weather-night";
     }
   },
 
   computed: {
-    ...mapState(['darkTheme', 'language']),
-  },
-
-  watch: {
-    local(value) {
-      if (value) {
-        this.$i18n.locale = 'fa';
-        this.$vuetify.lang.current = 'fa';
-        this.$vuetify.rtl = true;
-        sessionStorage.setItem('lang', 'fa');
-      } else {
-        this.$i18n.locale = 'en';
-        this.$vuetify.lang.current = 'en';
-        this.$vuetify.rtl = false;
-        sessionStorage.setItem('lang', 'en');
-        // console.log(this.$store.language.current.name);
-      }
-    },
+    ...mapState(["darkTheme", "language"]),
   },
 };
 </script>
