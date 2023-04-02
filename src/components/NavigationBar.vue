@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: 'NavigationBar',
   data: () => ({
@@ -86,35 +88,65 @@ export default {
         this.$router.push('/Projects');
       }
     },
+    // setThemeSession() {
+    //   return this.$store.state.darkTheme;
+    // },
+    // setLangSession() {
+    //   return this.$store.state.lang;
+    // },
     themeHandler() {
       if (this.$vuetify.theme.dark == false) {
         this.iconTheme = 'mdi-white-balance-sunny';
         this.$vuetify.theme.dark = true;
+        // this.darkTheme(this.$vuetify.theme.dark);
+        // this.setThemeSession() =  this.$vuetify.theme.dark;
+        this.darkTheme = this.$vuetify.theme.dark;
+        console.log(this.darkTheme);
+        sessionStorage.setItem('darkTheme', this.$vuetify.theme.dark);
       } else {
         this.iconTheme = 'mdi-weather-night';
         this.$vuetify.theme.dark = false;
+        // this.darkTheme(this.$vuetify.theme.dark);
+        sessionStorage.setItem('darkTheme', this.$vuetify.theme.dark);
+        // this.setThemeSession() =  this.$vuetify.theme.dark;
+        // sessionStorage.setItem('darkTheme', this.$vuetify.theme.dark);
       }
     },
-
-    // changeLocale(switch1) {
-    //   if (switch1) {
-    //     this.switch1 = false;
-    //   } else {
-    //     this.switch1 = true;
-    //   }
+    // darkTheme(theme) {
+    //   this.$store.commit('darkTheme', theme);
+    // },
+    // language(lang) {
+    //   this.$store.commit('language', lang);
     // },
   },
-
+  mounted() {
+    const lastTheme = JSON.parse(sessionStorage.getItem('darkTheme'));
+    if (lastTheme == true) {
+      this.$vuetify.theme.dark = true;
+      this.iconTheme = 'mdi-white-balance-sunny';
+    } else {
+      this.$vuetify.theme.dark = false;
+      this.iconTheme = 'mdi-weather-night';
+    }
+  },
+  computed: {
+    computed: {
+      ...mapState(['darkTheme', 'language']),
+    },
+  },
   watch: {
     local(value) {
       if (value) {
         this.$i18n.locale = 'fa';
         this.$vuetify.lang.current = 'fa';
         this.$vuetify.rtl = true;
+        sessionStorage.setItem('lang', 'fa');
       } else {
         this.$i18n.locale = 'en';
         this.$vuetify.lang.current = 'en';
         this.$vuetify.rtl = false;
+        sessionStorage.setItem('lang', 'en');
+        // console.log(this.$store.language.current.name);
       }
     },
   },

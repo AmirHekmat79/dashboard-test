@@ -48,16 +48,6 @@
   </v-container>
 </template>
 <script>
-// import { Chart } from 'highcharts-vue';
-// import Highcharts from 'highcharts';
-// import stockInit from 'highcharts/modules/stock';
-
-// stockInit(Highcharts);
-
-// import Highcharts from "highcharts";
-// import stockInit from "highcharts/modules/stock";
-
-// stockInit(Highcharts);
 import { ColumnChart } from 'vuejs-highcharts';
 import { LineChart } from 'vuejs-highcharts';
 export default {
@@ -71,9 +61,6 @@ export default {
     return {
       Alignment: 'center',
       chart: {
-        title: 'Area chart title',
-        subtitle: 'Area chart subtitle',
-        backgroundColor: '#eee',
         xAxis: {
           // config here
           categories: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007],
