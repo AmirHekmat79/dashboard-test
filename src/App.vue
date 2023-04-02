@@ -10,9 +10,9 @@
 
 <script>
 // import DashboardPannel from "./components/DashboardPannel.vue";
-import NavigationBar from './components/NavigationBar.vue';
+import NavigationBar from "./components/NavigationBar.vue";
 export default {
-  name: 'App',
+  name: "App",
   props: {
     source: String,
   },
@@ -25,6 +25,19 @@ export default {
   }),
   components: {
     NavigationBar,
+  },
+
+  mounted() {
+    // initially set language
+    const selectedLocale = sessionStorage.getItem("lang");
+
+    this.$i18n.locale = selectedLocale;
+    this.$vuetify.lang.current = selectedLocale;
+    this.$vuetify.rtl = selectedLocale === "fa";
+    sessionStorage.setItem("lang", selectedLocale);
+
+    // store selected lang in vuex
+    this.$store.commit("setLang", selectedLocale);
   },
 };
 </script>

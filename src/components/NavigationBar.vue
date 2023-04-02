@@ -14,8 +14,8 @@
       <div class="icons d-flex justify-center items-center">
         <v-switch
           class="mx-5"
-          v-model="locale"
-          :label="locale.toUpperCase()"
+          :input-value="lang"
+          :label="lang.toUpperCase()"
           false-value="en"
           true-value="fa"
           @change="onChangeLocale"
@@ -59,12 +59,9 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
   name: "NavigationBar",
   data: () => ({
-    locale: "fa",
     drawer: false,
     iconTheme: "mdi-white-balance-sunny",
     items: [
@@ -76,11 +73,14 @@ export default {
     ],
   }),
   methods: {
-    onChangeLocale() {
-      this.$i18n.locale = this.locale;
-      this.$vuetify.lang.current = this.locale;
-      this.$vuetify.rtl = this.locale === "fa";
-      sessionStorage.setItem("lang", this.locale);
+    onChangeLocale(value) {
+      // store selected lang in vuex
+      this.$store.commit("setLang", value);
+
+      this.$i18n.locale = value;
+      this.$vuetify.lang.current = value;
+      this.$vuetify.rtl = value === "fa";
+      sessionStorage.setItem("lang", value);
     },
 
     navigatePages(title) {
@@ -96,18 +96,11 @@ export default {
         this.$router.push("/Projects");
       }
     },
-    // setThemeSession() {
-    //   return this.$store.state.darkTheme;
-    // },
-    // setLangSession() {
-    //   return this.$store.state.lang;
-    // },
+
     themeHandler() {
       if (this.$vuetify.theme.dark == false) {
         this.iconTheme = "mdi-white-balance-sunny";
         this.$vuetify.theme.dark = true;
-        // this.darkTheme(this.$vuetify.theme.dark);
-        // this.setThemeSession() =  this.$vuetify.theme.dark;
         this.darkTheme = this.$vuetify.theme.dark;
         console.log(this.darkTheme);
         sessionStorage.setItem(
@@ -117,25 +110,14 @@ export default {
       } else {
         this.iconTheme = "mdi-weather-night";
         this.$vuetify.theme.dark = false;
-        // this.darkTheme(this.$vuetify.theme.dark);
         sessionStorage.setItem(
           "darkTheme",
           JSON.stringify(this.$vuetify.theme.dark)
         );
-        // this.setThemeSession() =  this.$vuetify.theme.dark;
-        // sessionStorage.setItem('darkTheme', this.$vuetify.theme.dark);
       }
     },
-    // darkTheme(theme) {
-    //   this.$store.commit('darkTheme', theme);
-    // },
-    // language(lang) {
-    //   this.$store.commit('language', lang);
-    // },
   },
-  beforeCreate() {
-    this.$store.commit("initializeTheme");
-  },
+
   mounted() {
     const lastTheme = JSON.parse(sessionStorage.getItem("darkTheme"));
     if (lastTheme == true) {
@@ -148,7 +130,9 @@ export default {
   },
 
   computed: {
-    ...mapState(["darkTheme", "language"]),
+    lang() {
+      return this.$store.state.lang;
+    },
   },
 };
 </script>
