@@ -102,12 +102,18 @@ export default {
         // this.setThemeSession() =  this.$vuetify.theme.dark;
         this.darkTheme = this.$vuetify.theme.dark;
         console.log(this.darkTheme);
-        sessionStorage.setItem('darkTheme', this.$vuetify.theme.dark);
+        sessionStorage.setItem(
+          'darkTheme',
+          JSON.stringify(this.$vuetify.theme.dark)
+        );
       } else {
         this.iconTheme = 'mdi-weather-night';
         this.$vuetify.theme.dark = false;
         // this.darkTheme(this.$vuetify.theme.dark);
-        sessionStorage.setItem('darkTheme', this.$vuetify.theme.dark);
+        sessionStorage.setItem(
+          'darkTheme',
+          JSON.stringify(this.$vuetify.theme.dark)
+        );
         // this.setThemeSession() =  this.$vuetify.theme.dark;
         // sessionStorage.setItem('darkTheme', this.$vuetify.theme.dark);
       }
@@ -119,6 +125,9 @@ export default {
     //   this.$store.commit('language', lang);
     // },
   },
+  beforeCreate() {
+    this.$store.commit('initializeTheme');
+  },
   mounted() {
     const lastTheme = JSON.parse(sessionStorage.getItem('darkTheme'));
     if (lastTheme == true) {
@@ -129,11 +138,11 @@ export default {
       this.iconTheme = 'mdi-weather-night';
     }
   },
+
   computed: {
-    computed: {
-      ...mapState(['darkTheme', 'language']),
-    },
+    ...mapState(['darkTheme', 'language']),
   },
+
   watch: {
     local(value) {
       if (value) {

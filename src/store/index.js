@@ -37,11 +37,20 @@ export default new Vuex.Store({
     //   state.lang = lang;
     //   sessionStorage.setItem('setLang', lang);
     // },
-    SetDarkTheme(state, darkTheme) {
-      state.darkTheme = darkTheme;
-    },
-    setLanguage(state, language) {
-      state.language.current = language;
-    },
+    // SetDarkTheme(state, darkTheme) {
+    //   state.darkTheme = darkTheme;
+    // },
+    // setLanguage(state, language) {
+    //   state.language.current = language;
+    // },
+    initializeTheme(state) {
+			// Check if the ID exists
+			if(sessionStorage.getItem('darkTheme')) {
+				// Replace the state object with the stored item
+				this.replaceState(
+					Object.assign(state, JSON.parse(sessionStorage.getItem('darkTheme')))
+				);
+			}
+		}
   },
 });
