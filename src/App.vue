@@ -29,7 +29,7 @@ export default {
 
   mounted() {
     // initially set language
-    const selectedLocale = sessionStorage.getItem("lang");
+    const selectedLocale = sessionStorage.getItem("lang") || "fa";
     this.$i18n.locale = selectedLocale;
     this.$vuetify.lang.current = selectedLocale;
     this.$vuetify.rtl = selectedLocale === "fa";
