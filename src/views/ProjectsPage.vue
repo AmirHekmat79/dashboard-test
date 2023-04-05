@@ -15,12 +15,12 @@
           <v-text-field
             v-model="name"
             :label="$t('name')"
-            :rules="[ruleRequired]"
+            :rules="[ruleRequired ,nameRules]"
           ></v-text-field>
           <v-text-field
             v-model="description"
             :label="$t('description')"
-            :rules="[ruleRequired]"
+            :rules="[ruleRequired , descriptionRules]"
           ></v-text-field>
 
           <v-btn color="warning" @click="AddProject"> {{ $t('Add') }} </v-btn>
@@ -42,23 +42,14 @@
 <script>
 import AddDialogs from '@/components/AddDialogs.vue';
 import { ruleRequired } from '@/helpers/rules.js';
+import { nameRules } from '@/helpers/rules.js';
+import { descriptionRules } from '@/helpers/rules.js';
 import { getOneProject } from '@/api/apiProjects';
 export default {
   data: () => ({
     description: null,
     name: null,
     customerName: null,
-
-    // headers: [
-    //   {
-    //     align: 'center',
-    //   },
-    //   { text: 'name', value: 'name' },
-    //   {
-    //     text: 'description',
-    //     value: 'description',
-    //   },
-    // ],
     projectsDetails: [
       {
         name: 'passw',
@@ -118,22 +109,27 @@ export default {
 
   methods: {
     ruleRequired,
-
+    nameRules,
+    descriptionRules,
     AddProject() {
-      if (!this.$refs.form.validate()) {
-        console.log('not valid');
-        return;
+      if (this.$refs.form.validate()) {
+        if (this.name != null && this.description != null) {
+          this.projectsDetails.push({
+            name: this.name,
+            description: this.description,
+          });
+          console.log(this.projectsDetails);
+        }
       }
 
       console.log('reached');
     },
-    
   },
   computed: {
     getHeaders() {
       const t = this.$t.bind(this);
       return [
-        {align : 'center'},
+        { align: 'center' },
         { text: t('name'), value: 'name' },
         { text: t('description'), value: 'description' },
       ];

@@ -14,19 +14,19 @@
           <v-text-field
             v-model="validityDuration"
             :label="$t('validityDuration')"
-            :rules="[validateCustomerName]"
+            :rules="[ruleRequired , nameRules]"
           ></v-text-field>
 
           <v-text-field
             v-model="customerName"
             :label="$t('customerName')"
-            :rules="[validateCustomerName]"
+            :rules="[vruleRequired , nameRules]"
           ></v-text-field>
 
           <v-text-field
             v-model="projectName"
             :label="$t('projectName')"
-            :rules="[validateCustomerName]"
+            :rules="[ruleRequired , nameRules]"
             required
           ></v-text-field>
 
@@ -35,7 +35,6 @@
       </AddDialogs>
     </v-card>
     <v-data-table
-      
       :headers="getHeaders"
       :items="licenseDetails"
       class="text-center elevation-4 font-weight-bold"
@@ -50,23 +49,14 @@
 <script>
 import AddDialogs from '@/components/AddDialogs.vue';
 import { getOneLicense } from '@/api/apiLicenses';
-import { validateCustomerName } from '@/helpers/rules';
+import { ruleRequired } from '../helpers/rules';
+import { nameRules } from '../helpers/rules';
 export default {
   data() {
     return {
       validityDuration: null,
-      customerName : null ,
-      projectName : null,
-     
-
-      // headers: [
-      //   {
-      //     align: 'center',
-      //   },
-      //   { text: this.$t('validityDuration'), value: 'validityDuration' },
-      //   { text: this.$t('customerName'), value: 'customerName' },
-      //   { text: this.$t('projectName'), value: 'projectName' },
-      // ],
+      customerName: null,
+      projectName: null,
       licenseDetails: [
         {
           validityDuration: 86400,
@@ -155,11 +145,21 @@ export default {
     AddDialogs,
   },
   methods: {
-    validateCustomerName,
+    ruleRequired,
+    nameRules,
     AddLicense() {
-      if (!this.$refs.form.validate()) {
-        console.log('not valid');
-        return;
+      if (this.$refs.form.validate()) {
+        if (
+          this.validityDuration != null &&
+          this.customerName != null &&
+          this.projectName != null
+        ) {
+          this.licenseDetails.push({
+            validityDuration: this.validityDuration,
+            customerName: this.customerName,
+            projectName: this.projectName,
+          });
+        }
       }
     },
   },
@@ -167,7 +167,7 @@ export default {
     getHeaders() {
       const t = this.$t.bind(this);
       return [
-        {align : 'center'},
+        { align: 'center' },
         { text: t('validityDuration'), value: 'validityDuration' },
         { text: t('customerName'), value: 'customerName' },
         { text: t('projectName'), value: 'projectName' },

@@ -15,13 +15,13 @@
           <v-text-field
             v-model="username"
             :label="$t('username')"
-            :rules="[ruleRequired]"
+            :rules="[ruleRequired, nameRules]"
           ></v-text-field>
 
           <v-text-field
             v-model="password"
             :label="$t('password')"
-            :rules="[ruleRequired]"
+            :rules="[ruleRequired, passwordRules]"
           ></v-text-field>
 
           <v-btn color="warning" @click="AddUser"> {{ $t('Add') }} </v-btn>
@@ -29,7 +29,7 @@
       </AddDialogs>
     </v-card>
     <v-data-table
-     :footer-props = "{'items-per-page-text':this.$t('itemsPerPageText')}"
+      :footer-props="{ 'items-per-page-text': this.$t('itemsPerPageText') }"
       :headers="getHeaders"
       :items="usersDetails"
       class="elevation-4 font-weight-bold"
@@ -45,19 +45,13 @@
 import { getOneUser } from '@/api/apiUsers';
 import AddDialogs from '@/components/AddDialogs.vue';
 import { ruleRequired } from '../helpers/rules';
-
+import { nameRules } from '../helpers/rules';
+import { passwordRules } from '../helpers/rules';
 export default {
   data: () => ({
     username: null,
     password: null,
 
-    // headers: [
-    //   {
-    //     align: 'center',
-    //   },
-    //   { text: 'Username', value: 'username' },
-    //   { text: 'Password', value: 'password' },
-    // ],
     usersDetails: [
       {
         username: 'rezvani2001',
@@ -107,14 +101,19 @@ export default {
 
   methods: {
     ruleRequired,
-
+    passwordRules,
+    nameRules,
     AddUser() {
-      if (!this.$refs.form.validate()) {
-        console.log('not valid');
-        return;
+      if (this.password != null && this.password != null) {
+        this.usersDetails.push({
+          username: this.username,
+          password: this.password,
+        });
+        console.log(this.usersDetails);
+      } else {
+        prompt('Enter valid value !');
+        console.log(this.usersDetails);
       }
-
-      console.log('reached');
     },
   },
   computed: {
@@ -126,6 +125,7 @@ export default {
         { text: t('Password'), value: 'password' },
       ];
     },
+
     // rowPerPageLocale() {
     //   if (this.$i18n.locale == 'fa') {
     //     return 'ردیف در صفحه:';
@@ -134,7 +134,7 @@ export default {
     //   }
     // },
   },
-  created() {
+  mounted() {
     getOneUser().then((res) => {
       console.log(res);
     });

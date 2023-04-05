@@ -12,30 +12,31 @@
       >
         <v-form ref="form" lazy-validation>
           <v-text-field
-            v-model="username"
+            v-model="name"
             :label="$t('Username')"
-            :rules="[validateCustomerName]"
+            :rules="[ruleRequired, nameRules]"
           ></v-text-field>
 
           <v-text-field
             v-model="email"
             :label="$t('email')"
+            :rules="[ruleRequired, emailRules]"
             required
           ></v-text-field>
           <v-text-field
             v-model="password"
             :label="$t('Password')"
-            :rules="[validateCustomerName]"
+            :rules="[ruleRequired, passwordRules]"
           ></v-text-field>
           <v-text-field
             v-model="address"
             :label="$t('address')"
-            :rules="[validateCustomerName]"
+            :rules="[ruleRequired, addressRules]"
           ></v-text-field>
           <v-text-field
             v-model="phoneNumber"
             :label="$t('phoneNumber')"
-            :rules="[validateCustomerName]"
+            :rules="[ruleRequired, phoneNumberRules]"
           ></v-text-field>
 
           <v-btn color="warning" @click="AddCustomer"> {{ $t('Add') }} </v-btn>
@@ -57,8 +58,11 @@
 <script>
 import AddDialogs from '@/components/AddDialogs.vue';
 import { getOneCustomer } from '@/api/apiCustomer';
-// import { validateCustomerName } from '@/helpers/rules';
-import { validateCustomerName } from '../helpers/rules';
+import { nameRules } from '../helpers/rules';
+import { emailRules } from '../helpers/rules';
+import { passwordRules } from '../helpers/rules';
+import { phoneNumberRules } from '../helpers/rules';
+import { addressRules } from '../helpers/rules';
 import { ruleRequired } from '../helpers/rules';
 export default {
   data() {
@@ -147,13 +151,20 @@ export default {
   },
   methods: {
     ruleRequired,
-
-    validateCustomerName,
-
+    nameRules,
+    emailRules,
+    passwordRules,
+    phoneNumberRules,
+    addressRules,
     AddCustomer() {
-      if (!this.$refs.form.validate()) {
-        console.log('not valid');
-        return;
+      if (this.$refs.form.validate()) {
+        this.customerDetails.push({
+          name: this.name,
+          email: this.email,
+          phoneNumber: this.phoneNumber,
+          address: this.address,
+          password: this.password,
+        });
       }
     },
   },

@@ -1,54 +1,42 @@
 export function ruleRequired(v) {
-  return v != null ? true : 'invalid value ';
+  return v != null ? true : 'Enter a correct value';
 }
 
-export function validateCustomerName(v) {
-  if (v.length == 48) {
-    return true;
-  } else if (v.length > 48) {
-    return 'please enter validate name!';
-  } else {
-    return 'This Field is Required!';
-  }
+export function nameRules(value) {
+  return value.length <= 48 ? true : 'Name must be less than 48 characters.';
 }
 
-// export {
-//   nameRules : [
-//     value => {
-//       if (value) return true
+export function descriptionRules(value) {
+  return value.length === 0
+    ? 'Fill the description please!'
+    : value.length < 3
+    ? 'description length must be atleast 3 characters'
+    : value.length > 255
+    ? 'description length must not exceed 255 characters'
+    : true;
+}
+export function addressRules(value) {
+  return value.length <= 255 ? true : 'Name must be less than 256 characters.';
+}
 
-//       return 'Name is requred.'
-//     },
-//     value => {
-//       if (value?.length <= 10) return true
+export function emailRules(value) {
+  if (/.+@.+\..+/.test(value)) return true;
+  else return 'E-mail must be valid.';
+}
 
-//       return 'Name must be less than 10 characters.'
-//     },
-//   ],
-// }
+export function passwordRules(value) {
+  return value.length === 0
+    ? 'Fill the password please!'
+    : value.length < 8
+    ? 'Password length must be atleast 8 characters'
+    : value.length > 50
+    ? 'Password length must not exceed 50 characters'
+    : true;
+}
 
-// export nameRules =[
-//   value => {
-//     if (value) return true
-
-//     return 'Name is requred.'
-//   },
-//   value => {
-//     if (value?.length <= 10) return true
-
-//     return 'Name must be less than 10 characters.'
-//   },
-// ],
-
-// export emailRules: [
-//   value => {
-//     if (value) return true
-
-//     return 'E-mail is requred.'
-//   },
-//   value => {
-//     if (/.+@.+\..+/.test(value)) return true
-
-//     return 'E-mail must be valid.'
-//   },
-// ],
+export function phoneNumberRules(Value) {
+  let phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{5})$/;
+  return phoneno.test(Value) && Value.length <= 11
+    ? true
+    : 'Enter Valid phoneNumber please';
+}

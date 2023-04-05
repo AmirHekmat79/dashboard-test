@@ -8,7 +8,7 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>
-        <div>{{ $t("dashboarMainTitle") }}</div>
+        <div>{{ $t('dashboarMainTitle') }}</div>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <div class="icons d-flex justify-center items-center">
@@ -60,39 +60,38 @@
 
 <script>
 export default {
-  name: "NavigationBar",
+  name: 'NavigationBar',
   data: () => ({
     drawer: false,
     items: [
-      { title: "dashboard" },
-      { title: "user" },
-      { title: "licenses" },
-      { title: "project" },
-      { title: "customer" },
+      { title: 'dashboard' },
+      { title: 'user' },
+      { title: 'licenses' },
+      { title: 'project' },
+      { title: 'customer' },
     ],
   }),
   methods: {
     onChangeLocale(value) {
       // store selected lang in vuex
-      this.$store.commit("setLang", value);
-
+      this.$store.commit('setLang', value);
       this.$i18n.locale = value;
       this.$vuetify.lang.current = value;
-      this.$vuetify.rtl = value === "fa";
-      sessionStorage.setItem("lang", value);
+      this.$vuetify.rtl = value === 'fa';
+      sessionStorage.setItem('lang', value);
     },
 
     navigatePages(title) {
-      if (title === "مشتری" || title === "customer") {
-        this.$router.push("/Customers");
-      } else if (title === "کاربر" || title === "user") {
-        this.$router.push("/Users");
-      } else if (title === "لایسنس ها" || title === "licenses") {
-        this.$router.push("/Licenses");
-      } else if (title === "داشبورد" || title === "dashboard") {
-        this.$router.push("/");
+      if (title === 'مشتری' || title === 'customer') {
+        this.$router.push('/Customers');
+      } else if (title === 'کاربر' || title === 'user') {
+        this.$router.push('/Users');
+      } else if (title === 'لایسنس ها' || title === 'licenses') {
+        this.$router.push('/Licenses');
+      } else if (title === 'داشبورد' || title === 'dashboard') {
+        this.$router.push('/');
       } else {
-        this.$router.push("/Projects");
+        this.$router.push('/Projects');
       }
     },
 
@@ -101,14 +100,14 @@ export default {
       this.$vuetify.theme.dark = !this.isDarkTheme;
 
       // store selected theme in vuex and session storage
-      sessionStorage.setItem("isDark", !this.isDarkTheme);
-      this.$store.commit("setIsDarkTheme", !this.isDarkTheme);
+      sessionStorage.setItem('isDark', !this.isDarkTheme);
+      this.$store.commit('setIsDarkTheme', !this.isDarkTheme);
     },
   },
 
   computed: {
     iconTheme() {
-      return this.isDarkTheme ? "mdi-white-balance-sunny" : "mdi-weather-night";
+      return this.isDarkTheme ? 'mdi-white-balance-sunny' : 'mdi-weather-night';
     },
 
     lang() {
