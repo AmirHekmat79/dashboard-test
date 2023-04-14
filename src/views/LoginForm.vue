@@ -17,6 +17,7 @@
                     prepend-icon="mdi-account-box"
                     name="login"
                     :label="$t('Username')"
+                    v-model="username"
                     type="text"
                     :rules="[ruleRequired]"
                   ></v-text-field>
@@ -26,13 +27,16 @@
                     name="password"
                     :label="$t('Password')"
                     type="password"
+                    v-model="password"
                     :rules="[ruleRequired]"
                   ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="success" to="/">{{ $t('Entry') }}</v-btn>
+                <v-btn color="success" @click="loginUser">{{
+                  $t('Entry')
+                }}</v-btn>
               </v-card-actions>
             </v-card>
           </v-col>
@@ -54,10 +58,19 @@ export default {
       // valid: false,
       // firstname: "",
       // lastname: "",
+      username: '',
+      password: '',
     };
   },
   methods: {
     ruleRequired,
+    loginUser() {
+      if (this.username === 'test' && this.password === 'test') {
+        this.$router.push('/');
+      } else {
+        console.log('error');
+      }
+    },
   },
 };
 </script>

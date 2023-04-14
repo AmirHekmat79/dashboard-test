@@ -135,7 +135,7 @@ export default {
       ];
     },
   },
-  created() {
+  mounted() {
     getOneProject().then((res) => {
       console.log(res);
     });

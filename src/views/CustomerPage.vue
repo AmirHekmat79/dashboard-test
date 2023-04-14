@@ -181,7 +181,7 @@ export default {
       ];
     },
   },
-  created() {
+  mounted() {
     getOneCustomer().then((res) => {
       console.log(res);
     });

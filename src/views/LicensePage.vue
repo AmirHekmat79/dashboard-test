@@ -174,7 +174,7 @@ export default {
       ];
     },
   },
-  created() {
+  mounted() {
     getOneLicense().then((res) => {
       console.log(res);
     });
